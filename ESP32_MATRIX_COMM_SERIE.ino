@@ -154,9 +154,11 @@ void setup(void) {
 void loop(void) {
    if (Serial2.available()) {
         String receivedMessage = Serial2.readStringUntil('\n');
-        Serial.print(": ");
+        Serial.print("Message reçu de l'Arduino : ");
         Serial.println(receivedMessage);
-        matrix.print("Message reçu de l'Arduino : ");
+        matrix.fillScreen(0); // Clear the background
+        matrix.setCursor(1, 0);
+        matrix.print("- ");
         matrix.println(receivedMessage);
         
         // Réponse à l'Arduino
