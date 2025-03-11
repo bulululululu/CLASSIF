@@ -178,7 +178,11 @@ void nextStage() {
 void resetGame() {
     currentStage = 0;
     gameStarted = false;
-    Serial.println("Retour au début. Appuie sur un bouton pour commencer.");
+    Serial.println("Retour au début.");
+    mySerial.println("Retour au début.");
+    delay (200);
+    Serial.println("Appuie sur un bouton pour commencer !");
+    mySerial.println("Appuie sur un bouton pour commencer !");
 
     for (int i = 0; i < NUM_BUTTONS; i++) {
         leds[i] = CRGB::White;
