@@ -5,14 +5,18 @@ SoftwareSerial mySerial(11, 12); // RX, TX
 
 #define NUM_BUTTONS 8  // Nombre de boutons et LEDs
 #define LED_PIN 10
+#define NUM_LANGUE_BUTTONS 4  // Nombre de boutons de langues
 
 CRGB leds[NUM_BUTTONS];
 const int buttonPins[NUM_BUTTONS] = {2, 3, 4, 5, 6, 7, 8, 9};  // Broches des boutons
+const int langueButtons[NUM_LANGUE_BUTTONS] = {A0, A1, A2, A3};  // Boutons pour changer la langue NL-FR-DE-EN
 
 bool ledState[NUM_BUTTONS];      // true = allumée, false = éteinte
 bool disabledButtons[NUM_BUTTONS] = {false};  // Empêcher les boutons désactivés d'agir
 int currentStage = 0;            // Étape actuelle
+int LANGUE = 0;  // Variable de langue (0 à 3)
 bool gameStarted = false;
+
 
 // Définition des boutons corrects pour chaque étape
 const byte stages[4][NUM_BUTTONS] = {
@@ -33,12 +37,21 @@ void setup() {
         ledState[i] = true;
         disabledButtons[i] = false;  // Aucun bouton désactivé au début
     }
+
+
+    for (int i = 0; i < NUM_LANGUE_BUTTONS; i++) {
+        pinMode(langueButtons[i], INPUT_PULLUP);
+    }
+
     FastLED.show();
     Serial.println("Appuie sur un bouton pour commencer !");
     mySerial.println("Appuie sur un bouton pour commencer !");
 }
 
 void loop() {
+  
+    checkLangueButtons();  // Vérifier les boutons de langue
+  
     if (!gameStarted) {
         checkFirstPress();
         return;
@@ -76,6 +89,21 @@ void loop() {
 
     if (stageCompleted) {
         nextStage();
+    }
+}
+
+// Vérifie si un bouton de langue est pressé et met à jour LANGUE
+void checkLangueButtons() {
+    for (int i = 0; i < NUM_LANGUE_BUTTONS; i++) {
+        if (digitalRead(langueButtons[i]) == LOW) {
+            delay(50);
+            LANGUE = i;
+            Serial.print("Langue sélectionnée : ");
+            Serial.println(LANGUE);
+            mySerial.print("Langue sélectionnée : ");
+            mySerial.println(LANGUE);
+            delay(300);
+        }
     }
 }
 
