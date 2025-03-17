@@ -45,7 +45,7 @@ void setup() {
 
     FastLED.show();
     Serial.println("Appuie sur un bouton pour commencer !");
-    mySerial.println("Appuie sur un bouton pour commencer !");
+    mySerial.println("Appuie               sur un bouton pour   commencer !");
 }
 
 void loop() {
@@ -65,14 +65,14 @@ void loop() {
 
             if (!disabledButtons[i]) {  // Vérifie si le bouton est encore actif
                 Serial.print("Bouton pressé: "); Serial.println(i);
-                mySerial.print("Bouton pressé: "); mySerial.println(i);
+                mySerial.print("Bouton press"); mySerial.write(0x82); mySerial.print(" : ");;mySerial.println(i);
 
                 if (stages[currentStage][i] == 1 && ledState[i]) {  
                     leds[i] = CRGB::Black;  // Éteindre la LED
                     ledState[i] = false;
                     disabledButtons[i] = true;  // Désactiver le bouton
                     Serial.println("LED éteinte définitivement !");
-                    mySerial.println("LED éteinte définitivement !");
+                    mySerial.print("LED "); mySerial.write(0x82); mySerial.println("teinte !");
                 } else if (stages[currentStage][i] == 0) {  
                     flashLed(i);
                 }
@@ -100,7 +100,7 @@ void checkLangueButtons() {
             LANGUE = i;
             Serial.print("Langue sélectionnée : ");
             Serial.println(LANGUE);
-            mySerial.print("Langue sélectionnée : ");
+            mySerial.print("Langue               "); mySerial.print("s"); mySerial.write(0x82); mySerial.print("lectionn"); mySerial.write(0x82); mySerial.print("e :");
             mySerial.println(LANGUE);
             delay(300);
         }
@@ -112,10 +112,10 @@ void checkFirstPress() {
     for (int i = 0; i < NUM_BUTTONS; i++) {
         if (digitalRead(buttonPins[i]) == LOW) {
             Serial.println("Jeu commencé !");
-            mySerial.println("Jeu commencé !");
+            mySerial.print("Jeu commenc"); mySerial.write(0x82); mySerial.println(" !");
             gameStarted = true;
             Serial.println("Étape 1");
-            mySerial.println("Étape 1");
+            mySerial.write(0x90); mySerial.println("tape 1");
             return;
         }
     }
@@ -142,8 +142,8 @@ void nextStage() {
     currentStage++;
     if (currentStage >= 3) {
         Serial.println("Jeu terminé ! Redémmarage du jeu... !");
-        mySerial.println("Jeu terminé ! Redémmarage du jeu... !");
-        delay(2000);
+        mySerial.print("Jeu termin"); mySerial.write(0x82); mySerial.print(" !        "); mySerial.print("Red"); mySerial.write(0x82); mySerial.println("mmarage...");
+        delay(4000);
         currentStage = 0;
 
         for (int i = 0; i < NUM_BUTTONS; i++) {
@@ -153,6 +153,6 @@ void nextStage() {
         }
     }
     Serial.print("Étape "); Serial.println(currentStage + 1);
-    mySerial.print("Étape "); mySerial.println(currentStage + 1);
+    mySerial.write(0x90); mySerial.print("tape "); mySerial.println(currentStage + 1);
     FastLED.show();
 }
