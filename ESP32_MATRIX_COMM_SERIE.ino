@@ -158,7 +158,8 @@ void loop(void) {
         Serial.println(receivedMessage);
         matrix.fillScreen(0); // Clear the background
         matrix.setCursor(1, 0);
-        matrix.print("- ");
+        matrix.write(0x10);
+        matrix.print(" ");
         matrix.println(receivedMessage);
         
         // Réponse à l'Arduino
@@ -166,5 +167,5 @@ void loop(void) {
         matrix.show(); // Copy data to matrix buffers
     }
 
-    delay(500);
+    delay(200);
 }
