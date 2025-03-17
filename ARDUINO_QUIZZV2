@@ -102,7 +102,8 @@ void checkLangueButtons() {
             Serial.println(LANGUE);
             mySerial.print("Langue               "); mySerial.print("s"); mySerial.write(0x82); mySerial.print("lectionn"); mySerial.write(0x82); mySerial.print("e :");
             mySerial.println(LANGUE);
-            delay(300);
+            delay(500);
+            currentStage = 4; //relance le jeu lors du changement de langue
         }
     }
 }
@@ -143,7 +144,7 @@ void nextStage() {
     if (currentStage >= 3) {
         Serial.println("Jeu terminé ! Redémmarage du jeu... !");
         mySerial.print("Jeu termin"); mySerial.write(0x82); mySerial.print(" !        "); mySerial.print("Red"); mySerial.write(0x82); mySerial.println("mmarage...");
-        delay(4000);
+        delay(2000);
         currentStage = 0;
 
         for (int i = 0; i < NUM_BUTTONS; i++) {
