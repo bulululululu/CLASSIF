@@ -34,7 +34,7 @@ void setup() {
     Serial.begin(115200);
     mySerial.begin(9600);   // Port série vers ESP32
     FastLED.addLeds<WS2812, LED_PIN, GRB>(leds, NUM_BUTTONS);
-    delay (1000); // delas pour donner de l'avance au démarrage à l'ESP32
+    delay (1000); // delais pour donner de l'avance au démarrage à l'ESP32
     randomSeed(analogRead(0));
     int LANGUE = random(0,3); // Random Value from 0 to 3
     
@@ -206,6 +206,9 @@ void nextStage() {
               Serial.println("Erreur étape de fin");
               break;
   }
+      for (int i = 0; i < NUM_BUTTONS; i++) {
+        disabledButtons[i] = true; //désactive les boutons pour ne pas éteindre les leds de la dernière étape
+    }
         //resetGame(); // Pas utile le jeu reviens à zéro avec le timeout !
     } else {
         Serial.print("Étape "); Serial.println(currentStage + 1);
