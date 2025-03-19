@@ -111,7 +111,7 @@ void checkLangueButtons() {
             mySerial.println(LANGUE);
             lastActionTime = millis();  // Mettre à jour le timer
             delay(500);
-            currentStage = 4; //relance le jeu lors du changement de langue
+            resetGame(); //relance le jeu lors du changement de langue
         }
     }
 }
@@ -158,10 +158,10 @@ void flashLed(int index) {
 // Passe à l'étape suivante
 void nextStage() {
     currentStage++;
-    if (currentStage >= 4) {
+    if (currentStage >= 3) {
         Serial.println("Jeu terminé ! Recommence !");
         mySerial.print("Jeu termin"); mySerial.write(0x82); mySerial.print(" !        "); mySerial.print("Red"); mySerial.write(0x82); mySerial.println("mmarage...");
-        delay(2000);
+        delay(500);
         resetGame();
     } else {
         Serial.print("Étape "); Serial.println(currentStage + 1);
@@ -176,6 +176,7 @@ void resetGame() {
     currentStage = 0;
     gameStarted = false;
     Serial.println("Retour au début. Appuie sur un bouton pour commencer.");
+    mySerial.println("Appuie               sur un bouton pour   commencer !");
 
     for (int i = 0; i < NUM_BUTTONS; i++) {
         leds[i] = CRGB::White;
@@ -186,4 +187,3 @@ void resetGame() {
     FastLED.show();
     lastActionTime = millis();  // Remettre à zéro le timer
 }
-
