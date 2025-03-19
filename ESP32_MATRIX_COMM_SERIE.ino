@@ -154,8 +154,8 @@ void setup(void) {
 void loop(void) {
    if (Serial2.available()) {
         String receivedMessage = Serial2.readStringUntil('\n');
-        Serial.print("Message reçu de l'Arduino : ");
-        Serial.println(receivedMessage);
+        //Serial.print("Message reçu de l'Arduino : ");
+        //Serial.println(receivedMessage);
         matrix.fillScreen(0); // Clear the background
         matrix.setCursor(1, 0);
         matrix.write(0x10);
@@ -163,9 +163,9 @@ void loop(void) {
         matrix.println(receivedMessage);
         
         // Réponse à l'Arduino
-        Serial2.println("Hello Arduino !");
+        //Serial2.println("Hello Arduino !");
         matrix.show(); // Copy data to matrix buffers
     }
 
-    delay(200);
+    delay(50);
 }
