@@ -206,8 +206,7 @@ void nextStage() {
               Serial.println("Erreur étape de fin");
               break;
   }
-        delay(5000);
-        resetGame();
+        //resetGame(); // Pas utile le jeu reviens à zéro avec le timeout !
     } else {
         Serial.print("Étape "); Serial.println(currentStage + 1);
         
