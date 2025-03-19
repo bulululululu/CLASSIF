@@ -237,7 +237,7 @@ void nextStage() {
                 mySerial.println("Elimine les rectangles jaunes en appuyant dessus"); //FR
                 break;
               case 1:
-                mySerial.println("VVerwijder de gele rechthoeken door erop te drukken."); //NL
+                mySerial.println("Verwijder de gele rechthoeken door erop te drukken."); //NL
                 break;
               case 2:
                 mySerial.println("Eliminate the yellow rectangles by pressing on them.");//EN
@@ -292,7 +292,7 @@ void resetGame() {
         mySerial.println("Eliminate the green squares by pressing on them.");//EN
         break;
       case 3:
-        mySerial.println("Hallo! Dies ist eine Nachricht auf Deutsch."); //DE
+        mySerial.println("Entferne die grünen Quadrate, indem du darauf drückst."); //DE
         break;
       default:
         Serial.println("Erreur de la variable LANGUE !");
