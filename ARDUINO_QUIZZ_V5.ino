@@ -4,7 +4,7 @@
 SoftwareSerial mySerial(11, 12); // RX, TX
 
 #define NUM_BUTTONS 8  // Nombre de boutons et LEDs
-#define LED_PIN 10
+#define LED_PIN 10 // Pin data pour les neopixels
 #define NUM_LANGUE_BUTTONS 4  // Nombre de boutons de langues
 
 CRGB leds[NUM_BUTTONS];
@@ -14,16 +14,15 @@ const int langueButtons[NUM_LANGUE_BUTTONS] = {A0, A1, A2, A3};  // Boutons pour
 bool ledState[NUM_BUTTONS];      // true = allumée, false = éteinte
 bool disabledButtons[NUM_BUTTONS] = {false};  // Empêcher les boutons désactivés d'agir
 int currentStage = 0;            // Étape actuelle
-int LANGUE = 0;
+int LANGUE = 1; // Nederlands
 bool gameStarted = false;
-
 
 // Définition des boutons corrects pour chaque étape
 const byte stages[4][NUM_BUTTONS] = {
-    {1, 1, 0, 0, 0, 0, 0, 0},  // Étape 1 : boutons à éteindre
-    {0, 0, 1, 1, 0, 0, 0, 0},  // Étape 2
-    {0, 0, 0, 0, 1, 1, 0, 0},  // Étape 3
-    {0, 0, 0, 0, 0, 0, 1, 1}   // Étape 4
+    {1, 1, 0, 0, 0, 0, 0, 0},  // Étape 1 :  Les boutons à éteindre à la première étape
+    {0, 0, 1, 1, 0, 0, 0, 0},  // Étape 2 :  Les boutons à éteindre à la seconde étape
+    {0, 0, 0, 0, 1, 1, 0, 0},  // Étape 3 :  Les boutons à éteindre à la troisième étape
+    {0, 0, 0, 0, 0, 0, 1, 1}   // Étape 4 :  Les boutons qui resteront allumés à la fin
 };
 
 // Timeout
@@ -35,9 +34,8 @@ void setup() {
     mySerial.begin(9600);   // Port série vers ESP32
     FastLED.addLeds<WS2812, LED_PIN, GRB>(leds, NUM_BUTTONS);
     delay (1000); // delais pour donner de l'avance au démarrage à l'ESP32
-    randomSeed(analogRead(0));
-    int LANGUE = random(0,3); // Random Value from 0 to 3
-    
+   
+  
     for (int i = 0; i < NUM_BUTTONS; i++) {
         pinMode(buttonPins[i], INPUT_PULLUP);  // Activer résistance interne pull-up
         leds[i] = CRGB::White;  // Allume toutes les LEDs au départ
