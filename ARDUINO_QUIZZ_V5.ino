@@ -14,7 +14,7 @@ const int langueButtons[NUM_LANGUE_BUTTONS] = {A0, A1, A2, A3};  // Boutons pour
 bool ledState[NUM_BUTTONS];      // true = allumée, false = éteinte
 bool disabledButtons[NUM_BUTTONS] = {false};  // Empêcher les boutons désactivés d'agir
 int currentStage = 0;            // Étape actuelle
-int LANGUE = random(0, 3);  // Random Variable de langue de 0 à 3
+int LANGUE = 0;
 bool gameStarted = false;
 
 
@@ -34,6 +34,9 @@ void setup() {
     Serial.begin(115200);
     mySerial.begin(9600);   // Port série vers ESP32
     FastLED.addLeds<WS2812, LED_PIN, GRB>(leds, NUM_BUTTONS);
+    delay (1000); // delas pour donner de l'avance au démarrage à l'ESP32
+    randomSeed(analogRead(0));
+    int LANGUE = random(0,3); // Random Value from 0 to 3
     
     for (int i = 0; i < NUM_BUTTONS; i++) {
         pinMode(buttonPins[i], INPUT_PULLUP);  // Activer résistance interne pull-up
@@ -207,7 +210,6 @@ void nextStage() {
         resetGame();
     } else {
         Serial.print("Étape "); Serial.println(currentStage + 1);
-        Serial.print(currentStage);
         
         if (currentStage == 0) {
               switch (LANGUE) {
