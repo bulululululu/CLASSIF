@@ -20,7 +20,7 @@ bool gameStarted = false;
 
 // Définition des boutons corrects pour chaque étape
 const byte stages[4][NUM_BUTTONS] = {
-    {1, 1, 0, 0, 0, 0, 0, 0},  // Étape 1 : boutons corrects à éteindre
+    {1, 1, 0, 0, 0, 0, 0, 0},  // Étape 1 : boutons à éteindre
     {0, 0, 1, 1, 0, 0, 0, 0},  // Étape 2
     {0, 0, 0, 0, 1, 1, 0, 0},  // Étape 3
     {0, 0, 0, 0, 0, 0, 1, 1}   // Étape 4
@@ -207,8 +207,9 @@ void nextStage() {
         resetGame();
     } else {
         Serial.print("Étape "); Serial.println(currentStage + 1);
-
-        if (currentStage = 0) {
+        Serial.print(currentStage);
+        
+        if (currentStage == 0) {
               switch (LANGUE) {
               case 0:
                 mySerial.println("Elimine les carres verts en appuyant dessus"); //FR
@@ -228,7 +229,7 @@ void nextStage() {
             }
           }
 
-           if (currentStage = 1) {
+           if (currentStage == 1) {
               switch (LANGUE) {
               case 0:
                 mySerial.println("Elimine les rectangles jaunes en appuyant dessus"); //FR
@@ -248,7 +249,7 @@ void nextStage() {
             }
           }
 
-           if (currentStage = 2) {
+           if (currentStage == 2) {
               switch (LANGUE) {
               case 0:
                 mySerial.println("Elimine les carres rouges en appuyant dessus"); //FR
