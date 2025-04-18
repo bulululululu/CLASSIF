@@ -1,2 +1,2 @@
 # CLASSIF
-HANDSON de classification dans Planète vivante
+Codes pour le jeu de classification dans Planète vivante
