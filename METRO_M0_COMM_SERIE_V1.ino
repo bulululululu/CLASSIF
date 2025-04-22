@@ -2,11 +2,11 @@
 #include <Adafruit_GFX.h>
 //#include <Fonts/FreeMono9pt7b.h>
 
-uint8_t rgbPins[]  = {6, 7, 10, 11, 12, 13};
-uint8_t addrPins[] = {0, 1, 2, 3};
-uint8_t clockPin   = SDA;
-uint8_t latchPin   = 4;
-uint8_t oePin      = 5;
+uint8_t rgbPins[]  = {2,3,4,5,6,7};
+uint8_t addrPins[] = {A0,A1,A2,A3};
+uint8_t clockPin   = 8;
+uint8_t latchPin   = 10;
+uint8_t oePin      = 9;
 
 #define RXD2 22 // RX2 sur l'ESP32
 #define TXD2 23  // TX2 sur l'ESP32
