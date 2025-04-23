@@ -8,8 +8,8 @@ uint8_t clockPin   = 8;
 uint8_t latchPin   = 10;
 uint8_t oePin      = 9;
 
-#define RXD2 22 // RX2 sur l'ESP32
-#define TXD2 23  // TX2 sur l'ESP32
+#define RXD2 11 // RX2 sur METRO
+#define TXD2 12  // TX2 sur METRO
 
 Adafruit_Protomatter matrix(
   192,          // Width of matrix (or matrices, if tiled horizontally)
