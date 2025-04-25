@@ -1,3 +1,7 @@
+//SDA Giga (D20) -> SDA Metro M0
+//SCL Giga (D21) -> SCL Metro M0
+//GND -> GND
+
 #include <Wire.h>
 
 const byte slaveAddress = 0x08;
@@ -17,7 +21,7 @@ void loop() {
   Wire.write(valueToSend); // Envoie d'un octet
   Wire.endTransmission();
 
-  Serial.print("Envoyé au slave : ");
+  Serial.print("Envoyé au slave Metro : ");
   Serial.println(valueToSend);
 
   delay(1000); 
