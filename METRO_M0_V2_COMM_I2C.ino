@@ -43,17 +43,16 @@ void setup(void) {
 void loop() {
   if (affiche != previous_affiche) {
     previous_affiche = affiche;
-    //Serial.print("Valeur reçue : ");
-    //Serial.println(affiche);
+    Serial.print("Valeur reçue : ");
+    Serial.println(affiche);
     matrix.fillScreen(0); // Clear the background
     matrix.setCursor(1, 0);
     matrix.write(0x10);
-    matrix.print(" Valeur : ");
+    matrix.print("Valeur : ");
     matrix.println(affiche);
     matrix.show();
     }
-
-delay(100);
+ delay(10);
 }
 //I2C communication
 void receiveEvent(int howMany) {
