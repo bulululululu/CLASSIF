@@ -9,7 +9,8 @@ uint8_t clockPin   = 8;
 uint8_t latchPin   = 10;
 uint8_t oePin      = 9;
 
-volatile int affiche = 0;
+volatile int affiche = -1;
+int previous_affiche = -1;
 
 Adafruit_Protomatter matrix(
   192,          // Width of matrix (or matrices, if tiled horizontally)
@@ -18,7 +19,7 @@ Adafruit_Protomatter matrix(
   4, addrPins, // # of address pins (height is inferred), array of pins
   clockPin, latchPin, oePin, // Other matrix control pins
   false,       // No double-buffering here (see "doublebuffer" example)
-  -1);         // Row tiling
+  0);         // Row tiling
 
 
 // SETUP - RUNS ONCE AT PROGRAM START --------------------------------------
@@ -40,16 +41,19 @@ void setup(void) {
 
 // LOOP - RUNS REPEATEDLY AFTER SETUP --------------------------------------
 void loop() {
-  Serial.print("Valeur reçue : ");
-  Serial.println(affiche);
- 
-  matrix.fillScreen(0); // Clear the background
-  matrix.setCursor(1, 0);
-  matrix.write(0x10);
-  matrix.print(" ");
-  matrix.println(affiche);
-  matrix.show();
-  delay(50);
+  if (affiche != previous_affiche) {
+    previous_affiche = affiche;
+    //Serial.print("Valeur reçue : ");
+    //Serial.println(affiche);
+    matrix.fillScreen(0); // Clear the background
+    matrix.setCursor(1, 0);
+    matrix.write(0x10);
+    matrix.print(" Valeur : ");
+    matrix.println(affiche);
+    matrix.show();
+    }
+
+delay(100);
 }
 //I2C communication
 void receiveEvent(int howMany) {
