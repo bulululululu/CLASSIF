@@ -48,6 +48,7 @@ void loop() {
   matrix.write(0x10);
   matrix.print(" ");
   matrix.println(affiche);
+  matrix.show();
   delay(50);
 }
 //I2C communication
