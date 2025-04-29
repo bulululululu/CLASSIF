@@ -127,7 +127,7 @@ void checkLangueButtons() {
               break;
   }
             lastActionTime = millis();  // Mettre à jour le timer
-            delay(500);
+            delay(200);
             resetGame(); //relance le jeu lors du changement de langue
         }
     }
