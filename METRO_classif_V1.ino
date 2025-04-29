@@ -150,7 +150,7 @@ void loop() {
         matrix.show();
         break;
       case 13:
-        clignote(100);
+        clignote(100, GREEN);
         matrix.fillScreen(0);
         matrix.setCursor(1, 0);
         matrix.write(0x10);
@@ -159,7 +159,7 @@ void loop() {
         matrix.show();
         break;
       case 14:
-        clignote(100);
+        clignote(100, GREEN);
         matrix.fillScreen(0);
         matrix.setCursor(1, 0);
         matrix.write(0x10);
@@ -168,7 +168,7 @@ void loop() {
         matrix.show();
         break;
       case 15:
-        clignote(100);
+        clignote(100, GREEN);
         matrix.fillScreen(0);
         matrix.setCursor(1, 0);
         matrix.write(0x10);
@@ -177,7 +177,7 @@ void loop() {
         matrix.show();
         break;
       case 16:
-        clignote(100);
+        clignote(100, GREEN);
         matrix.fillScreen(0);
         matrix.setCursor(1, 0);
         matrix.write(0x10);
@@ -207,21 +207,21 @@ void receiveEvent(int howMany) {
   }
 }
 
-//CLIGNOTAGE ECRAN
-void clignote(int clignotage) {
-    matrix.fillScreen(GREEN);
+//duree ECRAN
+void clignote(int duree, int couleur) {
+    matrix.fillScreen(couleur);
     matrix.show();
-    delay(clignotage);
+    delay(duree);
     matrix.fillScreen(0);
     matrix.show();
-    delay(clignotage);
-    matrix.fillScreen(GREEN);
+    delay(duree);
+    matrix.fillScreen(couleur);
     matrix.show();
-    delay(clignotage);       
+    delay(duree);       
     matrix.fillScreen(0);
     matrix.show();
-    delay(clignotage);
-    matrix.fillScreen(GREEN);
+    delay(duree);
+    matrix.fillScreen(couleur);
     matrix.show();
-    delay(clignotage);
+    delay(duree);
 }
