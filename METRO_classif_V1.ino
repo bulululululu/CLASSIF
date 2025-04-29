@@ -19,16 +19,21 @@ int previous_affichage = -1;
 #define CYAN     0x07FF
 #define MAGENTA  0xF81F
 #define YELLOW   0xFFE0 
-#define WHITE    0xFFFF
+#define WHITE    0xC638
+
+#define FLECHE     0x10 //>
+#define EACCENT    0x82 //é
+#define EMAJACCENT 0x90 //É
+
 
 Adafruit_Protomatter matrix(
-  192,          // Width of matrix (or matrices, if tiled horizontally)
+  192,          // Width of matrix (or matrices, if tiled horizontally) 192,128,64
   1,           // Bit depth, 1-6
   1, rgbPins,  // # of matrix chains, array of 6 RGB pins for each
   4, addrPins, // # of address pins (height is inferred), array of pins
   clockPin, latchPin, oePin, // Other matrix control pins
   false,       // No double-buffering here (see "doublebuffer" example)
-  0);         // Row tiling
+  -1);         // Row tiling
 
 
 // SETUP - RUNS ONCE AT PROGRAM START --------------------------------------
@@ -46,6 +51,7 @@ void setup(void) {
     // DO NOT CONTINUE if matrix setup encountered an error.
     for(;;);
   }
+  matrix.setTextColor(WHITE);
 }
 
 // LOOP - RUNS REPEATEDLY AFTER SETUP --------------------------------------
@@ -53,143 +59,161 @@ void loop() {
   if (affichage != previous_affichage) {
     previous_affichage = affichage;
         switch (affichage) {
-      case 1:
+      case 1: //TXT NL ETAPE 0
         matrix.fillScreen(0);
         matrix.setCursor(1, 0);
         matrix.write(0x10);
-        matrix.println(" Verwijder de groene vakjes door erop te drukken");//TXT NL ETAPE 0
+        matrix.println(" Verwijder de groene vakjes door erop te drukken");
         matrix.println(affichage);
         matrix.show();
         break;
-      case 2:
+      case 2: //TXT FR ETAPE 0
         matrix.fillScreen(0);
         matrix.setCursor(1, 0);
-        matrix.write(0x10);
-        matrix.println(" Élimine les carrés verts en appuyant dessus");//TXT FR ETAPE 0
+        matrix.write(FLECHE);//fleche
+        matrix.print(" ");
+        matrix.write(EMAJACCENT);//É
+        matrix.print("limine les carr");
+        matrix.write(EACCENT); //é
+        matrix.println("s verts");
+        matrix.println("  en appuyant dessus");
+        matrix.println(" ");
         matrix.println(affichage);
         matrix.show();
         break;
-      case 3:
+      case 3: //TXT EN ETAPE 0
         matrix.fillScreen(0);
         matrix.setCursor(1, 0);
-        matrix.write(0x10);
-        matrix.println(" Remove the green squares by tapping on them");//TXT EN ETAPE 0
+        matrix.write(FLECHE);
+        matrix.println(" Remove the green squares by tapping on them");
         matrix.println(affichage);
         matrix.show();
         break;
-      case 4:
+      case 4: //TXT DE ETAPE 0
         matrix.fillScreen(0);
         matrix.setCursor(1, 0);
-        matrix.write(0x10);
-        matrix.println(" Entferne die grünen Quadrate, indem du darauf tippst");//TXT DE ETAPE 0
+        matrix.write(FLECHE);
+        matrix.println(" Entferne die grünen Quadrate, indem du darauf tippst");
         matrix.println(affichage);
         matrix.show();
         break;
-      case 5:
+      case 5: //TXT NL ETAPE 1
         matrix.fillScreen(0);
         matrix.setCursor(1, 0);
-        matrix.write(0x10);
-        matrix.println(" Verwijder de gele rechthoeken door erop te drukken");//TXT NL ETAPE 1
+        matrix.write(FLECHE);
+        matrix.println(" Verwijder de gele rechthoeken door erop te drukken");
         matrix.println(affichage);
         matrix.show();
         break;
-      case 6:
+      case 6: //TXT FR ETAPE 1
         matrix.fillScreen(0);
         matrix.setCursor(1, 0);
-        matrix.write(0x10);
-        matrix.println(" Élimine les rectangles jaunes en appuyant dessus");//TXT FR ETAPE 1
+        matrix.write(FLECHE);//fleche
+        matrix.print(" ");
+        matrix.write(EMAJACCENT);//É
+        matrix.println("limine les rectangles jaunes");
+        matrix.println("  en appuyant dessus");
+        matrix.println(" ");
         matrix.println(affichage);
         matrix.show();
         break;
-      case 7:
+      case 7: //TXT EN ETAPE 1
         matrix.fillScreen(0);
         matrix.setCursor(1, 0);
-        matrix.write(0x10);
-        matrix.println(" Remove the yellow rectangles by tapping on them");//TXT EN ETAPE 1
+        matrix.write(FLECHE);
+        matrix.println(" Remove the yellow rectangles by tapping on them");
         matrix.println(affichage);
         matrix.show();
         break;
-      case 8:
+      case 8: //TXT DE ETAPE 1
         matrix.fillScreen(0);
         matrix.setCursor(1, 0);
-        matrix.write(0x10);
-        matrix.println(" Entferne die gelben Rechtecke, indem du darauf tippst");//TXT DE ETAPE 1
+        matrix.write(FLECHE);
+        matrix.println(" Entferne die gelben Rechtecke, indem du darauf tippst");
         matrix.println(affichage);
         matrix.show();
         break;
-      case 9:
+      case 9: //TXT NL ETAPE 2
         matrix.fillScreen(0);
         matrix.setCursor(1, 0);
-        matrix.write(0x10);
-        matrix.println(" Verwijder de rode vakjes door erop te drukken");//TXT NL ETAPE 2
+        matrix.write(FLECHE);
+        matrix.println(" Verwijder de rode vakjes door erop te drukken");
         matrix.println(affichage);
         matrix.show();
         break;
-      case 10:
+      case 10: //TXT FR ETAPE 2
         matrix.fillScreen(0);
         matrix.setCursor(1, 0);
-        matrix.write(0x10);
-        matrix.println(" Élimine les carrés rouges en appuyant dessus");//TXT FR ETAPE 2
+        matrix.write(FLECHE);//fleche
+        matrix.print(" ");
+        matrix.write(EMAJACCENT);//É
+        matrix.print("limine les carr");
+        matrix.write(EACCENT); //é
+        matrix.println("s rouges");
+        matrix.println("  en appuyant dessus");
+        matrix.println(" ");
         matrix.println(affichage);
         matrix.show();
         break;
-      case 11:
+      case 11: //TXT EN ETAPE 2
         matrix.fillScreen(0);
         matrix.setCursor(1, 0);
-        matrix.write(0x10);
-        matrix.println(" Remove the red squares by tapping on them");//TXT EN ETAPE 2
+        matrix.write(FLECHE);
+        matrix.println(" Remove the red squares by tapping on them");
         matrix.println(affichage);
         matrix.show();
         break;
-      case 12:
+      case 12: //TXT DE ETAPE 2
         matrix.fillScreen(0);
         matrix.setCursor(1, 0);
-        matrix.write(0x10);
-        matrix.println(" Entferne die roten Quadrate, indem du darauf tippst");//TXT DE ETAPE 2
+        matrix.write(FLECHE);
+        matrix.println(" Entferne die roten Quadrate, indem du darauf tippst");
         matrix.println(affichage);
         matrix.show();
         break;
-      case 13:
+      case 13: //TXT NL ETAPE 3
         clignote(100, GREEN);
         matrix.fillScreen(0);
         matrix.setCursor(1, 0);
-        matrix.write(0x10);
-        matrix.println(" Alleen de gele driehoeken blijven over!");//TXT NL ETAPE 3
+        matrix.write(FLECHE);
+        matrix.println(" Alleen de gele driehoeken blijven over!");
         matrix.println(affichage);
         matrix.show();
         break;
-      case 14:
+      case 14: //TXT FR ETAPE 3
         clignote(100, GREEN);
         matrix.fillScreen(0);
         matrix.setCursor(1, 0);
-        matrix.write(0x10);
-        matrix.println(" Il reste uniquement les triangles jaunes !");//TXT FR ETAPE 3
+        matrix.write(FLECHE);
+        matrix.println(" Il reste uniquement");
+        matrix.println("  les triangles jaunes !");
+        matrix.println(" ");
         matrix.println(affichage);
         matrix.show();
         break;
-      case 15:
+      case 15: //TXT EN ETAPE 3
         clignote(100, GREEN);
         matrix.fillScreen(0);
         matrix.setCursor(1, 0);
-        matrix.write(0x10);
-        matrix.println(" Only the yellow triangles are left!");//TXT EN ETAPE 3
+        matrix.write(FLECHE);
+        matrix.println(" Only the yellow triangles are left!");
         matrix.println(affichage);
         matrix.show();
         break;
-      case 16:
+      case 16: //TXT DE ETAPE 3
         clignote(100, GREEN);
         matrix.fillScreen(0);
         matrix.setCursor(1, 0);
-        matrix.write(0x10);
-        matrix.println(" Es sind nur noch die gelben Dreiecke übrig!");//TXT DE ETAPE 3
+        matrix.write(FLECHE);
+        matrix.println(" Es sind nur noch die gelben Dreiecke übrig!");
         matrix.println(affichage);
         matrix.show();
         break;
-      default:
+      default: //ERREUR !
         matrix.fillScreen(0);
         matrix.setCursor(1, 0);
-        matrix.write(0x10);
-        matrix.println(" ERREUR !");//ERREUR !
+        matrix.write(FLECHE);
+        matrix.println(" ERREUR !");
         matrix.println(affichage);
         matrix.show();
         break;
